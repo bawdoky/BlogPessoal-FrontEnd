@@ -35,7 +35,7 @@ function ListaPostagem() {
                             </Link>
                             <Link to='' className='text-decorator-none'>
                                 <Box mx={1}>
-                                    <Button variant='contained' size='small' className='secondary'>
+                                    <Button variant='contained' size='small' color='secondary'>
                                         deletar
                                     </Button>
                                 </Box>

@@ -6,8 +6,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
 import './CadastroTema.css';
 
-
-
 function CadastroTema() {
 
     let history = useHistory();
@@ -48,7 +46,7 @@ function CadastroTema() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log('tema ' + JSON.stringify(tema))
+        console.log('tema' + JSON.stringify(tema))
 
         if (id !== undefined) {
             console.log(tema)

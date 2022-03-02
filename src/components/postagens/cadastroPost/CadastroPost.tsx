@@ -17,7 +17,6 @@ function CadastroPost() {
         if (token == "") {
             alert('Você precisa estar logado')
             history.push("/login")
-
         }
     }, [token])
 
@@ -48,7 +47,7 @@ function CadastroPost() {
     }, [id])
 
     async function getTemas() {
-        await busca('/tema', setTemas, {
+        await busca('/temas', setTemas, {
             headers: {
                 'Authorization': token
             }
@@ -70,7 +69,6 @@ function CadastroPost() {
             [e.target.name]: e.target.value,
             tema: tema
         })
-
     }
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
@@ -92,17 +90,15 @@ function CadastroPost() {
             alert('Postagem cadastrada com sucesso');
         }
         back()
-
     }
 
     function back() {
-        history.push('/posts')
+        history.push('/postagens')
     }
-
 
     return (
         <Container maxWidth='sm' className='topo'>
-            <form >
+            <form onSubmit = {onSubmit} >
                 <Typography variant='h3' color='textSecondary' component='h1' align='center' >Formulário de cadastro postagem</Typography>
                 <TextField value={postagem.titulo} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id='titulo' label='titulo' variant='outlined' name='titulo' margin='normal' fullWidth />
                 <TextField value={postagem.texto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id='texto' label='texto' name='texto' variant='outlined' margin='normal' fullWidth />
@@ -112,7 +108,7 @@ function CadastroPost() {
                     <Select
                         labelId='demo-simple-select-helper-label'
                         id='demo-simple-select-helper'
-                        onChange={(e) => buscaId(`/tema/${e.target.value}`, setTema, {
+                        onChange={(e) => buscaId(`/temas/${e.target.value}`, setTema, {
                             headers: {
                                 'Authorization': token
                             }

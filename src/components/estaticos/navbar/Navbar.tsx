@@ -17,11 +17,13 @@ function Navbar() {
         <>
             <AppBar position='static'>
                 <Toolbar variant='dense'>
-                    <Box className='cursor'>
-                        <Typography variant='h5' color='inherit'>
-                            BlogPessoal
-                        </Typography>
-                    </Box>
+                    <Link to='/home' className='text-decorator-none'>
+                        <Box className='cursor'>
+                            <Typography variant='h5' color='inherit'>
+                                BlogPessoal
+                            </Typography>
+                        </Box>
+                    </Link>
 
                     <Box display='flex' justifyContent='start'>
                         <Link to='/home' className='text-decorator-none'>
@@ -48,7 +50,7 @@ function Navbar() {
                             </Box>
                         </Link>
 
-                        <Link to='/cadastratemas' className='text-decorator-none'>
+                        <Link to='/formularioTema' className='text-decorator-none'>
                             <Box mx={1} className='cursor'>
                                 <Typography variant='h6' color='inherit'>
                                     cadastrar temas
@@ -56,13 +58,12 @@ function Navbar() {
                             </Box>
                         </Link>
 
-                        <Link to='/login' className='text-decorator-none'>
-                            <Box mx={1} className='cursor'>
-                                <Typography variant='h6' color='inherit'>
-                                    logout
-                                </Typography>
-                            </Box>
-                        </Link>
+
+                        <Box mx={1} className='cursor' onClick={goLogout}>
+                            <Typography variant='h6' color='inherit'>
+                                logout
+                            </Typography>
+                        </Box>
 
                     </Box>
                 </Toolbar>

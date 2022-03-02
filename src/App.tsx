@@ -41,7 +41,7 @@ function App() {
             <ListaTema />
           </Route>
 
-          <Route path='/posts'>
+          <Route path='/postagens'>
             <ListaPostagem />
           </Route>
 

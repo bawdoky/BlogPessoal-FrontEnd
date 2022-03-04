@@ -15,12 +15,12 @@ function CadastroPost() {
     const [temas, setTemas] = useState<Tema[]>([])
 
     //const [token, setToken] = useLocalStorage('token');
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<TokenState, TokenState['tokens']>(
         (state) => state.tokens
     );
 
     useEffect(() => {
-        if (token == "") {
+        if (token == '') {
             //alert('Você precisa estar logado')
             toast.error('Você precisa estar logado', {
                 position: 'top-right',
@@ -32,7 +32,7 @@ function CadastroPost() {
                 theme: 'colored',
                 progress: undefined,
             });
-            history.push("/login")
+            history.push('/login')
         }
     }, [token])
 

@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { busca } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 import Tema from '../../../models/Tema';
 import './ListaTema.css';
-import useLocalStorage from 'react-use-localstorage';
-import { busca } from '../../../services/Service';
 
 function ListaTema() {
-  const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token');
-  let history = useHistory();
+    const [temas, setTemas] = useState<Tema[]>([])
 
-  useEffect(()=>{
-    if(token == ''){
-      alert('Você precisa estar logado')
-      history.push('/login')
+    //const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
+
+    let history = useHistory();
+
+    useEffect(() => {
+        if (token == '') {
+            alert('Você precisa estar logado')
+            history.push('/login')
+        }
+    }, [token])
+
+    async function getTema() {
+        await busca('/temas', setTemas, {
+            headers: {
+                'Authorization': token
+            }
+        })
     }
-  }, [token])
 
-
-  async function getTema(){
-    await busca('/temas', setTemas, {
-      headers: {
-        'Authorization': token
-      }
-    })
-  }
-
-  useEffect(()=>{
-    getTema()
-  }, [temas.length])
+    useEffect(() => {
+        getTema()
+    }, [temas.length])
 
     return (
         <>
@@ -42,13 +48,13 @@ function ListaTema() {
                                     Tema
                                 </Typography>
                                 <Typography variant='h5' component='h2'>
-                                {tema.descricao}
+                                    {tema.descricao}
                                 </Typography>
                             </CardContent>
                             <CardActions>
                                 <Box display='flex' justifyContent='center' mb={1.5} >
 
-                                <Link to={`/formularioTema/${tema.id}`} className='text-decorator-none'>
+                                    <Link to={`/formularioTema/${tema.id}`} className='text-decorator-none'>
                                         <Box mx={1}>
                                             <Button variant='contained' className='marinLeft' size='small' color='primary' >
                                                 atualizar

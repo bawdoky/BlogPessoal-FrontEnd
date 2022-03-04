@@ -1,16 +1,24 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Container, Typography, TextField, Button } from "@material-ui/core";
-import Tema from '../../../models/Tema';
-import { buscaId, post, put } from '../../../services/Service';
 import { useHistory, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
+import { useSelector } from 'react-redux';
+import { buscaId, post, put } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import Tema from '../../../models/Tema';
 import './CadastroTema.css';
+
 
 function CadastroTema() {
 
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [token, setToken] = useLocalStorage('token');
+
+    //const [token, setToken] = useLocalStorage('token');
+
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
+
     const [tema, setTema] = useState<Tema>({
         id: 0,
         descricao: ''
@@ -55,6 +63,7 @@ function CadastroTema() {
                     'Authorization': token
                 }
             })
+
             alert('Tema atualizado com sucesso');
         } else {
             post(`/temas`, tema, setTema, {
@@ -64,6 +73,7 @@ function CadastroTema() {
             })
             alert('Tema cadastrado com sucesso');
         }
+
         back()
     }
 

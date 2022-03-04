@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import './ListaPostagem.css';
-//import useLocalStorage from 'react-use-localstorage';
-import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import './ListaPostagem.css';
 
 function ListaPostagem() {
-    const [posts, setPosts] = useState<Postagem[]>([])
-    //const [token, setToken] = useLocalStorage('token');
     let history = useHistory();
+    const [posts, setPosts] = useState<Postagem[]>([])
+
+    //const [token, setToken] = useLocalStorage('token');    
     const token = useSelector<TokenState, TokenState['tokens']>(
         (state) => state.tokens
     );
-
+    
     useEffect(() => {
         if (token == '') {
-            alert('Você precisa estar logado')
+
+            //alert('Você precisa estar logado')
+            toast.error('Você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: 'colored',
+                progress: undefined,
+            });
+
             history.push('/login')
 
         }

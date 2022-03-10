@@ -16,7 +16,7 @@ function TabPostagem() {
                 <AppBar position='static'>
                     <Tabs centered indicatorColor='secondary' onChange={handleChange}>
                         <Tab label='Todas as postagens' value='1' />
-                        <Tab label='Sobre-nós' value='2' />
+                        <Tab label='Sobre Mim' value='2' />
                     </Tabs>
                 </AppBar>
 
@@ -27,8 +27,8 @@ function TabPostagem() {
                 </TabPanel>
 
                 <TabPanel value='2'>
-                    <Typography variant='h5' gutterBottom color='textPrimary' component='h5' align='center' className='titulo'>Sobre-nós</Typography>
-                    <Typography variant="body1" gutterBottom color='textPrimary' align='justify'>Lorem ipsum, dolor sit amet consectetur adipisicing elit!</Typography>
+                    <Typography variant='h5' gutterBottom color='textSecondary' component='h5' align='justify' >Quem sou eu!</Typography>
+                    <Typography variant="body1" gutterBottom color='textPrimary' align='justify'>Olá, eu me chamo Lucas Oi tenho 26 anos, moro em São Paulo e sou uma pessoa desenvolvedora FullStack </Typography>
                 </TabPanel>
             </TabContext>
         </>
